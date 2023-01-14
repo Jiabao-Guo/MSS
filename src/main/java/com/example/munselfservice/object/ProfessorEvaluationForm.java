@@ -9,6 +9,14 @@ import java.util.List;
 @Getter
 @Setter
 public class ProfessorEvaluationForm {
+
+    //根据前段
+    // onSubmit() {
+    //          axios.post('http://localhost:8080/professor-evaluation', {
+    //            ...this.form,  [包含很多属性]
+    //            studentNumber: localStorage.getItem("student_number"),
+    //            sessionId: localStorage.getItem("session"),
+    //          })
     private Integer studentNumber;
     private String sessionId;
     private Integer instructorNumber;
