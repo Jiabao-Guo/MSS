@@ -23,7 +23,7 @@ public class Course {
 
 
     //数据库存入教授号码 前段还是得显示名字 多表查询
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(
             name = "instructor_number",
             referencedColumnName = "instructor_number"
