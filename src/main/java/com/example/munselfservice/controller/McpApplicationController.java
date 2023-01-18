@@ -2,8 +2,8 @@ package com.example.munselfservice.controller;
 
 import com.example.munselfservice.entity.McpApplication;
 import com.example.munselfservice.entity.Student;
-import com.example.munselfservice.object.McpApplicationForm;
-import com.example.munselfservice.object.McpApplicationResponse;
+import com.example.munselfservice.controller.forms.McpApplicationForm;
+import com.example.munselfservice.controller.forms.McpApplicationResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -3,8 +3,8 @@ package com.example.munselfservice.controller;
 import com.example.munselfservice.entity.Course;
 import com.example.munselfservice.entity.CourseRegistration;
 import com.example.munselfservice.entity.Student;
-import com.example.munselfservice.object.CourseRegistrationForm;
-import com.example.munselfservice.object.CourseRegistrationResponse;
+import com.example.munselfservice.controller.forms.CourseRegistrationForm;
+import com.example.munselfservice.controller.forms.CourseRegistrationResponse;
 import com.example.munselfservice.repository.CourseRegistrationRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,6 +42,8 @@ public class CourseRegistrationController extends BaseController{
 
         }
 
+
+
         List<CourseRegistration> registrations = new ArrayList<>();
         for (Course course: courseRegistrationForm.getSelectCourse()) {
             CourseRegistration courseRegistration = new CourseRegistration();
@@ -55,7 +57,15 @@ public class CourseRegistrationController extends BaseController{
 
             registrations.add(courseRegistration);
         }
-        courseRegistrationRepository.saveAll(registrations);
+
+        //不可重复选课
+        try {
+            courseRegistrationRepository.saveAll(registrations);
+        }catch (Exception e){
+            return ResponseEntity.ok(
+                    new CourseRegistrationResponse(false,"do not choose the same course"));
+        }
+
 
         return ResponseEntity.ok(
                 new CourseRegistrationResponse(true, "you select successfully, and have " +

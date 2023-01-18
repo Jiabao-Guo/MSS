@@ -1,12 +1,9 @@
-package com.example.munselfservice.object;
+package com.example.munselfservice.controller.forms;
 
 
-import com.example.munselfservice.entity.Course;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.List;
 
 @Getter
 @Setter

@@ -2,7 +2,7 @@ package com.example.munselfservice.controller;
 
 import com.example.munselfservice.entity.Course;
 import com.example.munselfservice.entity.Student;
-import com.example.munselfservice.object.CourseForm;
+import com.example.munselfservice.controller.forms.CourseForm;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

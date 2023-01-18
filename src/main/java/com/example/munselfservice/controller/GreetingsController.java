@@ -1,8 +1,8 @@
 package com.example.munselfservice.controller;
 
 import com.example.munselfservice.entity.Student;
-import com.example.munselfservice.object.GreetingsForm;
-import com.example.munselfservice.object.GreetingsResponse;
+import com.example.munselfservice.controller.forms.GreetingsForm;
+import com.example.munselfservice.controller.forms.GreetingsResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

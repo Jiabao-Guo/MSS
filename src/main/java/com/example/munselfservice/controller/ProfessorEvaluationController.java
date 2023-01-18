@@ -2,8 +2,8 @@ package com.example.munselfservice.controller;
 
 import com.example.munselfservice.entity.ProfessorRating;
 import com.example.munselfservice.entity.Student;
-import com.example.munselfservice.object.ProfessorEvaluationForm;
-import com.example.munselfservice.object.ProfessorEvaluationResponse;
+import com.example.munselfservice.controller.forms.ProfessorEvaluationForm;
+import com.example.munselfservice.controller.forms.ProfessorEvaluationResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

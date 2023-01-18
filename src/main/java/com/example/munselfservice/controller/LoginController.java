@@ -1,8 +1,8 @@
 package com.example.munselfservice.controller;
 
 import com.example.munselfservice.entity.Student;
-import com.example.munselfservice.object.LoginForm;
-import com.example.munselfservice.object.LoginResponse;
+import com.example.munselfservice.controller.forms.LoginForm;
+import com.example.munselfservice.controller.forms.LoginResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

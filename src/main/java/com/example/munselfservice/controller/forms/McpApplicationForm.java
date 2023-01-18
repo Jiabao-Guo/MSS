@@ -1,6 +1,5 @@
-package com.example.munselfservice.object;
+package com.example.munselfservice.controller.forms;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
