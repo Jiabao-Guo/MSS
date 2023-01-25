@@ -10,6 +10,10 @@ import java.util.List;
 public interface InstructorRepository extends JpaRepository<Instructor, Integer> {
     // List<Instructor> findByNameContaining(String name);
 
+
+    //双击修改教授信息
+    Instructor findInstructorByInstructorNumber(Integer instructorNumber);
+
     //Pageable  本页的所有信息
     Page<Instructor> findAll(Pageable pageable);
 

@@ -1,11 +1,13 @@
 package com.example.munselfservice.controller;
 
 
+import com.example.munselfservice.controller.forms.InstructorModifyResponse;
 import com.example.munselfservice.controller.forms.InstructorQueryForm;
 import com.example.munselfservice.entity.Instructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +25,26 @@ public class InstructorController extends BaseController {
         // 搜索之后 初步符合条件的 放入第一页(20条)
         Pageable pageable = PageRequest.of(0, 20);
         return instructorRepository.findByNameContaining(pageable, name).getContent();
+    }
+
+    // RESTful update: PUT
+
+    // 双击修改数值
+    @PutMapping("/instructor/{instructorNumber}")
+    ResponseEntity<InstructorModifyResponse> modifyInstructor(
+            @PathVariable Integer instructorNumber,//需要修改的
+            @RequestBody Instructor givenInstructor//替换的
+    ) {
+        try {
+            Instructor targetInstructor = instructorRepository.findInstructorByInstructorNumber(instructorNumber);
+            targetInstructor.setName(givenInstructor.getName());
+            targetInstructor.setSalary(givenInstructor.getSalary());
+            instructorRepository.save(targetInstructor);
+            return ResponseEntity.ok(new InstructorModifyResponse(true, "Modify success"));
+        }
+        catch (Exception e) {
+            return ResponseEntity.ok(new InstructorModifyResponse(false, e.getMessage()));
+        }
     }
 
     @RequestMapping("/instructor/query")
