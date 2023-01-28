@@ -1,6 +1,7 @@
 package com.example.munselfservice.controller;
 
 
+import com.example.munselfservice.controller.forms.InstructorDeleteResponse;
 import com.example.munselfservice.controller.forms.InstructorModifyResponse;
 import com.example.munselfservice.controller.forms.InstructorQueryForm;
 import com.example.munselfservice.entity.Instructor;
@@ -8,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,12 +34,12 @@ public class InstructorController extends BaseController {
     // 双击修改数值
     @PutMapping("/instructor/{instructorNumber}")
     ResponseEntity<InstructorModifyResponse> modifyInstructor(
-            @PathVariable Integer instructorNumber,//需要修改的
-            @RequestBody Instructor givenInstructor//替换的
+            @PathVariable Integer instructorNumber,//
+            @RequestBody Instructor givenInstructor// 从前段传来的 需要改成的instructor
     ) {
         try {
             Instructor targetInstructor = instructorRepository.findInstructorByInstructorNumber(instructorNumber);
-            targetInstructor.setName(givenInstructor.getName());
+            targetInstructor.setName(givenInstructor.getName()); //把目标 替换成 新输入的值
             targetInstructor.setSalary(givenInstructor.getSalary());
             instructorRepository.save(targetInstructor);
             return ResponseEntity.ok(new InstructorModifyResponse(true, "Modify success"));
@@ -46,6 +48,27 @@ public class InstructorController extends BaseController {
             return ResponseEntity.ok(new InstructorModifyResponse(false, e.getMessage()));
         }
     }
+
+    // RESTful delete: DELETE
+    // DELETE/instructor/1,2,3,4,5
+    @Transactional // TODO: 为什么要加了这个才能删
+    @DeleteMapping("/instructor/{instructorNumbers}")
+    ResponseEntity<InstructorDeleteResponse> deleteInstructors(
+            @PathVariable List<Integer> instructorNumbers
+            //@RequestBody Instructor givenInstructor//
+    ) {
+        try {
+            //instructorRepository数据库的封装
+            instructorRepository.deleteAllByInstructorNumberIn(instructorNumbers);
+        } catch (Exception e) {
+            return ResponseEntity.ok(new InstructorDeleteResponse(
+                    false, "Delete false" + e.getMessage()));
+        }
+
+        return ResponseEntity.ok(new InstructorDeleteResponse(true, "Delete success"));
+    }
+
+
 
     @RequestMapping("/instructor/query")
     Page<Instructor> findBySalaryBetweenAndNameContaining(

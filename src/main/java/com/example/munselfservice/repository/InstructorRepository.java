@@ -27,4 +27,8 @@ public interface InstructorRepository extends JpaRepository<Instructor, Integer>
     );
 
     Page<Instructor> findByNameContaining(Pageable pageable, String name);
+
+    void deleteAllByInstructorNumberIn(List<Integer> instructorNumbers);
+
+
 }
