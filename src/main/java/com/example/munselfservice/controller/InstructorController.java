@@ -30,7 +30,6 @@ public class InstructorController extends BaseController {
     }
 
     // RESTful update: PUT
-
     // 双击修改数值
     @PutMapping("/instructor/{instructorNumber}")
     ResponseEntity<InstructorModifyResponse> modifyInstructor(

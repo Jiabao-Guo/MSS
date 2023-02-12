@@ -29,6 +29,9 @@ public class BaseController {
     @Resource
     protected McpApplicationRepository mcpApplicationRepository;
 
+    @Resource
+    protected ScheduleRepository scheduleRepository;
+
     /**
      *
      * 未来可能经常使用 从greetingcontroller 转移到这里
