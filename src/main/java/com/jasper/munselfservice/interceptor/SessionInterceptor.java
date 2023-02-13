@@ -2,11 +2,12 @@ package com.jasper.munselfservice.interceptor;
 
 import com.jasper.munselfservice.controller.BaseController;
 import com.jasper.munselfservice.entity.Student;
-import com.jasper.munselfservice.interceptor.fix.SpringContext;
+import com.jasper.munselfservice.config.SpringContext;
 import com.jasper.munselfservice.repository.StudentRepository;
 import com.jasper.munselfservice.util.CORSUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;

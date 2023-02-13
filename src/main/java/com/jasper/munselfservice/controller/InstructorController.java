@@ -4,6 +4,7 @@ package com.jasper.munselfservice.controller;
 import com.jasper.munselfservice.controller.forms.GenericResponse;
 import com.jasper.munselfservice.controller.forms.instructor.InstructorQueryForm;
 import com.jasper.munselfservice.entity.Instructor;
+import com.jasper.munselfservice.util.NumericUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -22,31 +23,11 @@ public class InstructorController extends BaseController {
             .getContent();
     }
 
-    @PutMapping("/instructor/{instructorNumber}")
-    ResponseEntity<GenericResponse> modifyInstructor(
-        @PathVariable Integer instructorNumber,
-        @RequestBody Instructor givenInstructor
-    ) {
+    @PostMapping("/instructor")
+    ResponseEntity<GenericResponse> create(@RequestBody Instructor instructor) {
         try {
-            Instructor targetInstructor = instructorRepository
-                .findInstructorByInstructorNumber(instructorNumber);
-            targetInstructor.setName(givenInstructor.getName());
-            targetInstructor.setSalary(givenInstructor.getSalary());
-            instructorRepository.save(targetInstructor);
-            return ok();
-        } catch (Exception e) {
-            return fail();
-        }
-    }
-
-    // DELETE/instructor/1,2,3,4,5
-    @Transactional
-    @DeleteMapping("/instructor/{instructorNumbers}")
-    ResponseEntity<GenericResponse> deleteInstructors(
-        @PathVariable List<Integer> instructorNumbers
-    ) {
-        try {
-            instructorRepository.deleteAllByInstructorNumberIn(instructorNumbers);
+            instructor.setPasswordSha256Sha256(null);
+            instructorRepository.save(instructor);
         } catch (Exception e) {
             return fail();
         }
@@ -55,13 +36,45 @@ public class InstructorController extends BaseController {
     }
 
     @GetMapping("/instructor")
-    Page<Instructor> findBySalaryBetweenAndNameContaining(InstructorQueryForm form) {
+    Page<Instructor> retrieve(InstructorQueryForm form) {
         Pageable pageable = PageRequest.of(form.getPage(), form.getAmount());
-        return instructorRepository.findBySalaryBetweenAndNameContaining(
-            pageable,
-            form.getMin(),
-            form.getMax(),
-            form.getName()
+
+        Integer instructorNumber = NumericUtil.parseIntOrDefault(form.getInstructorNumber(), 0);
+        Double min = NumericUtil.parseDoubleOrDefault(form.getMin(), -999999999.0);
+        Double max = NumericUtil.parseDoubleOrDefault(form.getMax(), 999999999.0);
+
+        return instructorRepository.findByInstructorNumberEqualsOrSalaryBetweenAndNameContaining(
+            pageable, instructorNumber, min, max, form.getName()
         );
+    }
+
+    // DELETE/instructor/1,2,3,4,5
+    @Transactional
+    @DeleteMapping("/instructor/{ids}")
+    ResponseEntity<GenericResponse> delete(@PathVariable List<Integer> ids) {
+        try {
+            instructorRepository.deleteAllByIdIn(ids);
+        } catch (Throwable e) {
+            if (e.getMessage().contains("foreign key constraint fails")) {
+                return fail("They are used by other entities");
+            }
+            return fail();
+        }
+
+        return ok();
+    }
+
+    @PutMapping("/instructor/{id}")
+    ResponseEntity<GenericResponse> update(@PathVariable Integer id, @RequestBody Instructor givenInstructor) {
+        try {
+            Instructor targetInstructor = instructorRepository.getReferenceById(id);
+            targetInstructor.setName(givenInstructor.getName());
+            targetInstructor.setSalary(givenInstructor.getSalary());
+            instructorRepository.save(targetInstructor);
+        } catch (Exception e) {
+            return fail();
+        }
+
+        return ok();
     }
 }

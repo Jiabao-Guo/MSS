@@ -29,7 +29,7 @@ public class Instructor {
     @Column(name = "salary", nullable = false, precision = 0)
     private Double salary;
     @Basic
-    @Column(name = "password_sha256_sha256", nullable = false, length = 64)
+    @Column(name = "password_sha256_sha256", nullable = true, length = 64)
     private String passwordSha256Sha256;
 
     @Override

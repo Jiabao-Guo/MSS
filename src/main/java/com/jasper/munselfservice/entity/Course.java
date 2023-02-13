@@ -25,20 +25,21 @@ public class Course {
     @Basic
     @Column(name = "name", nullable = false, length = 64)
     private String name;
-    @Basic
-    @Column(name = "instructor_number", nullable = false)
-    private Integer instructorNumber;
+
+    @JoinColumn(name = "instructor_number", referencedColumnName = "instructor_number", nullable = false)
+    @ManyToOne
+    private Instructor instructorByInstructorNumber;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Course course = (Course) o;
-        return Objects.equals(id, course.id) && Objects.equals(courseNumber, course.courseNumber) && Objects.equals(name, course.name) && Objects.equals(instructorNumber, course.instructorNumber);
+        return Objects.equals(id, course.id) && Objects.equals(courseNumber, course.courseNumber) && Objects.equals(name, course.name) && Objects.equals(instructorByInstructorNumber, course.instructorByInstructorNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, courseNumber, name, instructorNumber);
+        return Objects.hash(id, courseNumber, name, instructorByInstructorNumber.getInstructorNumber());
     }
 }

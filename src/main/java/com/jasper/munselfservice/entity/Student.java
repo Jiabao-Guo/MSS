@@ -32,7 +32,7 @@ public class Student {
     @Column(name = "age", nullable = false)
     private Integer age;
     @Basic
-    @Column(name = "password_sha256_sha256", nullable = false, length = 64)
+    @Column(name = "password_sha256_sha256", nullable = true, length = 64)
     private String passwordSha256Sha256;
     @OneToOne
     @JoinColumn(name = "student_number", referencedColumnName = "student_number", nullable = false, insertable = false, updatable = false)

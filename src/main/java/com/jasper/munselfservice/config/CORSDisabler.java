@@ -11,7 +11,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebMvc
-@Order(0)
 public class CORSDisabler implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {

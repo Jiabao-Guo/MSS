@@ -8,7 +8,8 @@ import lombok.Setter;
 public class InstructorQueryForm {
     private Integer page;
     private Integer amount;
-    private Double min;
-    private Double max;
+    private String instructorNumber;
+    private String min;
+    private String max;
     private String name;
 }

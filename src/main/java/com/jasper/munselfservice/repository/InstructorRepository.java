@@ -12,8 +12,9 @@ public interface InstructorRepository extends JpaRepository<Instructor, Integer>
 
     Page<Instructor> findAll(Pageable pageable);
 
-    Page<Instructor> findBySalaryBetweenAndNameContaining(
+    Page<Instructor> findByInstructorNumberEqualsOrSalaryBetweenAndNameContaining(
         Pageable pageable,
+        Integer instructorNumber,
         Double min,
         Double max,
         String name
@@ -21,5 +22,5 @@ public interface InstructorRepository extends JpaRepository<Instructor, Integer>
 
     Page<Instructor> findByNameContaining(Pageable pageable, String name);
 
-    void deleteAllByInstructorNumberIn(List<Integer> instructorNumbers);
+    void deleteAllByIdIn(List<Integer> ids);
 }
