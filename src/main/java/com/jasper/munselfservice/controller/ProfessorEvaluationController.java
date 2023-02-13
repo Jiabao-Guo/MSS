@@ -35,7 +35,7 @@ public class ProfessorEvaluationController extends BaseController {
 
         ProfessorRating rating = new ProfessorRating(
             null,
-            form.getStudentNumber(),
+            student.getStudentNumber(),
             form.getInstructorNumber(),
             new Timestamp(form.getLectureStartDate().getTime()),
             new Timestamp(form.getLectureEndDate().getTime()),

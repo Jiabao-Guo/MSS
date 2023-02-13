@@ -20,14 +20,6 @@ public class CourseRegistrationController extends BaseController {
     public ResponseEntity<GenericResponse> courseRegistration(
         @RequestBody CourseRegistrationForm courseRegistrationForm) {
 
-
-        Student student = getStudentFromSessionId(courseRegistrationForm.getStudentNumber(), courseRegistrationForm.getSessionId());
-
-        if (student == null) {
-            return fail("Invalid session");
-        }
-
-
         if (courseRegistrationForm.getSelectCourse().size() == 0) {
             return fail("No course specified");
         }

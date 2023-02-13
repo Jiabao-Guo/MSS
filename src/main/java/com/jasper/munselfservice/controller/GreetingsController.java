@@ -13,10 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class GreetingsController extends BaseController{
     @RequestMapping("/greetings")
     public ResponseEntity<GreetingsResponse> greetings(@RequestBody GreetingsForm entity) {
-
-        /**
-         entity.getStudentNumber(), entity.getSessionId() 从 前端 取得
-         */
         Student student = getStudentFromSessionId(entity.getStudentNumber(), entity.getSessionId());
 
         if (student == null) {
@@ -26,6 +22,4 @@ public class GreetingsController extends BaseController{
         return ResponseEntity.ok(
             new GreetingsResponse(student.getStudentName()));
     }
-
-
 }

@@ -23,7 +23,7 @@ public class McpApplicationController extends BaseController {
 
         McpApplication mcpApplication = new McpApplication(
             null,
-            form.getStudentNumber(),
+            student.getStudentNumber(),
             form.getMaritalStatus(),
             new Timestamp(form.getApplicationTime().getTime()),
             (byte) (form.getDelivery() ? 1 : 0),

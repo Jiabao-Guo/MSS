@@ -39,14 +39,18 @@ public class BaseController {
 
 
     protected Student getStudentFromSessionId(Integer studentNumber, String sessionId) {
+        return getStudentFromSessionId(redisTemplate, studentRepository, studentNumber, sessionId);
+    }
+
+    public static Student getStudentFromSessionId(RedisTemplate<Integer, String> redisTemplate, StudentRepository studentRepository, Integer studentNumber, String sessionId) {
         // TODO: 2023/2/12 临时测试用
         if (sessionId.equals("1")) {
             return studentRepository.findByStudentNumber(202096888);
         }
 
         String realSessionId = redisTemplate
-                .opsForValue()
-                .get(studentNumber);
+            .opsForValue()
+            .get(studentNumber);
 
         if (Objects.equals(realSessionId, sessionId)) {
             return studentRepository.findByStudentNumber(studentNumber);
