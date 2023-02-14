@@ -48,22 +48,6 @@ public class InstructorController extends BaseController {
         );
     }
 
-    // DELETE/instructor/1,2,3,4,5
-    @Transactional
-    @DeleteMapping("/instructor/{ids}")
-    ResponseEntity<GenericResponse> delete(@PathVariable List<Integer> ids) {
-        try {
-            instructorRepository.deleteAllByIdIn(ids);
-        } catch (Throwable e) {
-            if (e.getMessage().contains("foreign key constraint fails")) {
-                return fail("They are used by other entities");
-            }
-            return fail();
-        }
-
-        return ok();
-    }
-
     @PutMapping("/instructor/{id}")
     ResponseEntity<GenericResponse> update(@PathVariable Integer id, @RequestBody Instructor givenInstructor) {
         try {
@@ -75,6 +59,14 @@ public class InstructorController extends BaseController {
             return fail();
         }
 
+        return ok();
+    }
+
+    // DELETE/instructor/1,2,3,4,5
+    @Transactional
+    @DeleteMapping("/instructor/{ids}")
+    ResponseEntity<GenericResponse> delete(@PathVariable List<Integer> ids) {
+        instructorRepository.deleteAllByIdIn(ids);
         return ok();
     }
 }

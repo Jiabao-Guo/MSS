@@ -10,6 +10,5 @@ import java.util.List;
 @Setter
 public class CourseRegistrationForm {
     private Integer studentNumber;
-    private String sessionId;
-    private List<Course> selectCourse;
+    private List<Integer> courseNumbers;
 }

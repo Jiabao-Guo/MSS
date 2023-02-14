@@ -26,7 +26,11 @@ public class Course {
     @Column(name = "name", nullable = false, length = 64)
     private String name;
 
-    @JoinColumn(name = "instructor_number", referencedColumnName = "instructor_number", nullable = false)
+    @Basic
+    @Column(name = "instructor_number", nullable = false)
+    private Integer instructorNumber;
+
+    @JoinColumn(name = "instructor_number", referencedColumnName = "instructor_number", nullable = false, insertable = false, updatable = false)
     @ManyToOne
     private Instructor instructorByInstructorNumber;
 

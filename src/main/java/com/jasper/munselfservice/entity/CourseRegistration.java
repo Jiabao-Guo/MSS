@@ -1,5 +1,6 @@
 package com.jasper.munselfservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -20,28 +22,24 @@ public class CourseRegistration {
     @Id
     @Column(name = "id", nullable = false)
     private Integer id;
+
+    @Basic
+    @Column(name = "course_number", nullable = false)
+    private Integer courseNumber;
+
     @ManyToOne
-    @JoinColumn(name = "course_number", referencedColumnName = "course_number", nullable = false)
+    @JoinColumn(name = "course_number", referencedColumnName = "course_number", nullable = false, insertable = false, updatable = false)
     private Course course;
 
     @Basic
     @Column(name = "course_registration_time", nullable = false)
     private Timestamp courseRegistrationTime;
 
+    @Basic
+    @Column(name = "student_number", nullable = false)
+    private Integer studentNumber;
+
     @ManyToOne
-    @JoinColumn(name = "student_number", referencedColumnName = "student_number", nullable = false)
+    @JoinColumn(name = "student_number", referencedColumnName = "student_number", nullable = false, insertable = false, updatable = false)
     private Student student;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CourseRegistration that = (CourseRegistration) o;
-        return Objects.equals(id, that.id) && Objects.equals(course, that.course) && Objects.equals(courseRegistrationTime, that.courseRegistrationTime) && Objects.equals(student, that.student);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, course.getCourseNumber(), courseRegistrationTime, student.getStudentNumber());
-    }
 }

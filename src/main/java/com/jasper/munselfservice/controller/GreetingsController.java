@@ -17,9 +17,9 @@ public class GreetingsController extends BaseController{
 
         if (student == null) {
             return ResponseEntity.ok(
-                new GreetingsResponse("invalid student number"));
+                new GreetingsResponse("invalid student number", 0));
         }
         return ResponseEntity.ok(
-            new GreetingsResponse(student.getStudentName()));
+            new GreetingsResponse(student.getStudentName(), student.getId()));
     }
 }

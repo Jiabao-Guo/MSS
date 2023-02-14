@@ -9,4 +9,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class GreetingsResponse {
     private String name;
+    private Integer id;
 }

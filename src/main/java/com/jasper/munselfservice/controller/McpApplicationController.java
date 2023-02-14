@@ -21,16 +21,21 @@ public class McpApplicationController extends BaseController {
             return fail("Student does not exist");
         }
 
-        McpApplication mcpApplication = new McpApplication(
-            null,
-            student.getStudentNumber(),
-            form.getMaritalStatus(),
-            new Timestamp(form.getApplicationTime().getTime()),
-            (byte) (form.getDelivery() ? 1 : 0),
-            form.getIdentityType(),
-            form.getReason()
-        );
-        mcpApplicationRepository.save(mcpApplication);
+        try {
+            McpApplication mcpApplication = new McpApplication(
+                null,
+                student.getStudentNumber(),
+                form.getMaritalStatus(),
+                new Timestamp(form.getApplicationTime().getTime()),
+                (byte) (form.getDelivery() ? 1 : 0),
+                form.getIdentityType(),
+                form.getReason()
+            );
+            mcpApplicationRepository.save(mcpApplication);
+        }
+        catch (Exception e) {
+            return fail("Already applied");
+        }
 
         return ok();
     }
