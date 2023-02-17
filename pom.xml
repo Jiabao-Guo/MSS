@@ -8,7 +8,7 @@
         <version>3.0.1</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.example</groupId>
+    <groupId>com.jasper</groupId>
     <artifactId>mun-selfservice</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>mun-selfservice</name>
@@ -17,13 +17,10 @@
         <java.version>17</java.version>
     </properties>
     <dependencies>
-
-        <!-- 链接 radius -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
-
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
