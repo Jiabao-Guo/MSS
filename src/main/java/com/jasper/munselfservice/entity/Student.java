@@ -43,6 +43,6 @@ public class Student {
     @Column(name = "age", nullable = false)
     private Integer age;
     @Basic
-    @Column(name = "password_sha256_sha256", nullable = true, length = 64)
-    private String passwordSha256Sha256;
+    @Column(name = "password", nullable = true, length = 128)
+    private String password;
 }

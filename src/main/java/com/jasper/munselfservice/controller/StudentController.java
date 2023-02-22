@@ -16,11 +16,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.nio.file.Path;
 import java.util.*;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @RestController
@@ -39,7 +35,7 @@ public class StudentController extends AbstractRestfulController<Student, Studen
     @PostMapping("/student")
     public ResponseEntity<GenericResponse> create(@RequestBody Student entity) {
         try {
-            entity.setPasswordSha256Sha256(null);
+            entity.setPassword(null);
             studentRepository.save(entity);
         } catch (Exception e) {
             return fail();
@@ -119,7 +115,7 @@ public class StudentController extends AbstractRestfulController<Student, Studen
                     s.setStudentName(item.get("studentName"));
                     s.setGender(item.get("gender").equals("f") ? Student.Gender.f : Student.Gender.m);
                     s.setAge(NumericUtil.parseIntOrDefault(item.get("age"), 0));
-                    s.setPasswordSha256Sha256(null);
+                    s.setPassword(null);
                     return s;
                 }).collect(Collectors.toSet())
             )

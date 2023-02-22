@@ -7,6 +7,8 @@ import lombok.Setter;
 @Setter
 public class LoginForm {
     private Integer number;
-    private String passwordSha256;
-    private Boolean isStudentLogin;
+    private String passwordSha256Sha256;
+    private Boolean studentLogin;
+    private Boolean verifyOnly;
+    private String salt;
 }
