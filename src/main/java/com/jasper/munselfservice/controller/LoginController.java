@@ -3,7 +3,7 @@ package com.jasper.munselfservice.controller;
 import com.jasper.munselfservice.controller.forms.login.LoginForm;
 import com.jasper.munselfservice.controller.forms.login.LoginResponse;
 import com.jasper.munselfservice.entity.Student;
-import com.jasper.munselfservice.util.Hash;
+import com.jasper.munselfservice.util.HashUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,10 +23,9 @@ public class LoginController extends BaseController {
         if (student == null) {
             return ResponseEntity.ok(
                 new LoginResponse(false, "user invalid.", null));
-
         }
 
-        String entityPasswordSha256Sha256 = Hash.sha256(entity.getPasswordSha256());
+        String entityPasswordSha256Sha256 = HashUtil.sha256(entity.getPasswordSha256());
 
         if (student.getPasswordSha256Sha256().equals(entityPasswordSha256Sha256)) {
             return ResponseEntity.ok(
