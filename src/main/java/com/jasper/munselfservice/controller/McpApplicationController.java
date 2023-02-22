@@ -22,15 +22,14 @@ public class McpApplicationController extends BaseController {
         }
 
         try {
-            McpApplication mcpApplication = new McpApplication(
-                null,
-                student.getStudentNumber(),
-                form.getMaritalStatus(),
-                new Timestamp(form.getApplicationTime().getTime()),
-                (byte) (form.getDelivery() ? 1 : 0),
-                form.getIdentityType(),
-                form.getReason()
-            );
+            McpApplication mcpApplication = new McpApplication();
+            mcpApplication.setStudentNumber(student.getStudentNumber());
+            mcpApplication.setMaritalStatus(form.getMaritalStatus());
+            mcpApplication.setApplicationTime(new Timestamp(form.getApplicationTime().getTime()));
+            mcpApplication.setDelivery((byte) (form.getDelivery() ? 1 : 0));
+            mcpApplication.setIdentityType(form.getIdentityType());
+            mcpApplication.setReason(form.getReason());
+
             mcpApplicationRepository.save(mcpApplication);
         }
         catch (Exception e) {

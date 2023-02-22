@@ -31,17 +31,4 @@ public class Instructor {
     @Basic
     @Column(name = "password_sha256_sha256", nullable = true, length = 64)
     private String passwordSha256Sha256;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Instructor that = (Instructor) o;
-        return Objects.equals(id, that.id) && Objects.equals(instructorNumber, that.instructorNumber) && Objects.equals(name, that.name) && Objects.equals(salary, that.salary) && Objects.equals(passwordSha256Sha256, that.passwordSha256Sha256);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, instructorNumber, name, salary, passwordSha256Sha256);
-    }
 }

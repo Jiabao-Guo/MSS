@@ -7,6 +7,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+@Order(2)
 @Configuration
 @EnableWebMvc
 public class InterceptorConfigurer implements WebMvcConfigurer {
@@ -15,6 +16,4 @@ public class InterceptorConfigurer implements WebMvcConfigurer {
         registry.addInterceptor(new SessionInterceptor());
         WebMvcConfigurer.super.addInterceptors(registry);
     }
-
-
 }

@@ -5,7 +5,7 @@ import jakarta.annotation.Nullable;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 
-public class Hash {
+public class HashUtil {
     /**
      * Hash a string using SHA-256
      * @param base The string to hash

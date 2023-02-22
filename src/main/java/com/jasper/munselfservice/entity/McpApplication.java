@@ -1,5 +1,7 @@
 package com.jasper.munselfservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -39,16 +41,7 @@ public class McpApplication {
     @Column(name = "reason", nullable = false, length = 255)
     private String reason;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        McpApplication that = (McpApplication) o;
-        return Objects.equals(id, that.id) && Objects.equals(studentNumber, that.studentNumber) && Objects.equals(maritalStatus, that.maritalStatus) && Objects.equals(applicationTime, that.applicationTime) && Objects.equals(delivery, that.delivery) && Objects.equals(identityType, that.identityType) && Objects.equals(reason, that.reason);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, studentNumber, maritalStatus, applicationTime, delivery, identityType, reason);
-    }
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "student_number", referencedColumnName = "student_number", nullable = false, insertable = false, updatable = false)
+    private Student studentByStudentNumber;
 }

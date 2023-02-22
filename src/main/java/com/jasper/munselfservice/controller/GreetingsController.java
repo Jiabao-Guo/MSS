@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-public class GreetingsController extends BaseController{
+public class GreetingsController extends BaseController {
     @RequestMapping("/greetings")
     public ResponseEntity<GreetingsResponse> greetings(@RequestBody GreetingsForm entity) {
         Student student = getStudentFromSessionId(entity.getStudentNumber(), entity.getSessionId());
