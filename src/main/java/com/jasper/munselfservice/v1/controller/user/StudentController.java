@@ -42,7 +42,7 @@ public class StudentController extends AbstractUserController<StudentQueryForm> 
             form.getName(),
             form.getGender(),
             form.getEmail(),
-            NumericUtil.parseIntOrDefault(form.getAgeLowerBound(), Integer.MIN_VALUE),
+            NumericUtil.parseIntOrDefault(form.getAgeLowerBound(), -Integer.MAX_VALUE),
             NumericUtil.parseIntOrDefault(form.getAgeUpperBound(), Integer.MAX_VALUE)
         );
     }

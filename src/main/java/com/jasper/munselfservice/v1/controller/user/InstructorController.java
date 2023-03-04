@@ -37,7 +37,7 @@ public class InstructorController extends AbstractUserController<InstructorQuery
             NumericUtil.parseIntOrDefault(form.getUid(), 0),
             form.getName(),
             form.getEmail(),
-            NumericUtil.parseIntOrDefault(form.getSalaryLowerBound(), Integer.MIN_VALUE),
+            NumericUtil.parseIntOrDefault(form.getSalaryLowerBound(), -Integer.MAX_VALUE),
             NumericUtil.parseIntOrDefault(form.getSalaryUpperBound(), Integer.MAX_VALUE)
         );
     }
@@ -67,5 +67,13 @@ public class InstructorController extends AbstractUserController<InstructorQuery
     @Transactional
     public ResponseEntity<GenericResponse> delete(@PathVariable List<Integer> ids) {
         return super.delete(ids);
+    }
+
+    @GetMapping("/api/v1/instructor/by-name/{name}")
+    public List<User> retrieveByName(@PathVariable String name) {
+        return userRepository.findAllByNameContainingIgnoreCaseAndInstructorInfoIsNotNull(
+            PageRequest.of(0, 20),
+            name
+        ).toList();
     }
 }
