@@ -7,14 +7,12 @@ public class SaltUtil {
 
     public static String calculateSaltForLogin(
         String plaintextSha256Sha256,
-        Integer number,
-        Boolean isStudentLogin
+        Integer number
     ) {
         return HashUtil.sha256(
             plaintextSha256Sha256
                 + timestampToSalt()
                 + number.toString()
-                + (isStudentLogin ? "1" : "0")
         );
     }
 }
